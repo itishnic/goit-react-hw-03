@@ -5,7 +5,7 @@ import css from "./Contact.module.css";
 
 
 
-const Contact = ({ id, name, number , onDelete}) => {
+const Contact = ({ data: { id, name, number }, onDelete }) => {
   return (
     <>
       <div className={css.contactButton}>

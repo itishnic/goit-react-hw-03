@@ -1,6 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useId } from "react";
+import css from "./ContactForm.module.css"
+
+
+
 
 const validationSchema = Yup.object().shape({
 id: Yup.string(),
@@ -24,13 +28,17 @@ const ContactForm = ({ onAdd }) => {
     const numberFieldId = useId();
 
 const handleSubmit = (values, { resetForm }) => {
-  onAdd({
+   const newContact = {
     id: Date.now(),
     name: values.name,
     number: values.number,
-  });
+  };
+  
+  onAdd(newContact);
   resetForm();
+  console.log("ID нового контакта:", newContact.id);
 };
+
 
 
   return (
@@ -43,15 +51,21 @@ const handleSubmit = (values, { resetForm }) => {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <Form>
+        <Form className={css.form}>
           <br />
-          <label htmlFor={nameFieldId}>Username</label>
-          <Field type="text" name="name" id={nameFieldId} />
-          <ErrorMessage name="name" component="span" />
+          <div className={css.field}>
+            <label htmlFor={nameFieldId}>Username </label>
+            <Field type="text" name="name" id={nameFieldId} />
+            <ErrorMessage name="name" component="span" />
+          </div>
+
           <br />
-          <label htmlFor={numberFieldId}>Number</label>
-          <Field type="text" name="number" id={numberFieldId} />
-          <ErrorMessage name="number" component="span" />
+          <div className={css.field}>
+            <label htmlFor={numberFieldId}>Number </label>
+            <Field type="text" name="number" id={numberFieldId} />
+            <ErrorMessage name="number" component="span" />
+          </div>
+
           <br />
           <button type="submit">Add contact</button>
         </Form>

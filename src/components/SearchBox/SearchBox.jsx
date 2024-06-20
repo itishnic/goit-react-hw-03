@@ -1,29 +1,15 @@
-import { Formik, Form, Field } from "formik";
+import css from "./SearchBox.module.css";
 
-const initialValues = {
-  username: "",
-  
-};
-
-const handleSubmit = (values, actions) => {
-  console.log(values);
-  actions.resetForm();
-};
-
-
-
-const SearchBox = () => {
+export default function SearchBox({ value, onFilter }) {
   return (
     <div>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-              <Form>
-                  <p>Find contact by name</p>
-          <Field type="text" name="username" placeholder="Enter fullname" />
-          
-        </Form>
-      </Formik>
+      <p className={css.label}>Find contacts by name</p>
+      <input
+        
+        type="text"
+        value={value}
+        onChange={(e) => onFilter(e.target.value)}
+      />
     </div>
   );
-};
-
-export default SearchBox;
+}

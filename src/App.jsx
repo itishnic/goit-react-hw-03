@@ -11,9 +11,10 @@ import ContactList from "./components/ContactList/ContactList";
 function App() {
   const [contacts, setContacts] = useState(() => {
     const savedContacts = localStorage.getItem("cardList");
-    return savedContacts !== null
+    return savedContacts.length !== null
       ? JSON.parse(savedContacts)
-      : JSON.parse(initialContacts);
+      : initialContacts;
+    
   });
   const [filter, setFilter] = useState("");
 

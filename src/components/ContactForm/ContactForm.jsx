@@ -11,7 +11,7 @@ id: Yup.string(),
 
 
   name: Yup.string()
-    .min(2, "Too Short!")
+    .min(3, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
 

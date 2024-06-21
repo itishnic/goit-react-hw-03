@@ -9,7 +9,10 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
 
 function App() {
-  const [contacts, setContacts] = useState(initialContacts); 
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem("cardList");
+    return savedContacts ? JSON.parse(savedContacts) : initialContacts;
+  }); 
   const [filter, setFilter] = useState("");
 
   const addContact = (newContacts) => {
@@ -33,7 +36,7 @@ function App() {
   }, [contacts]);
 
   return (
-    <div>
+    <div className={css.container}>
       <h1>Phonebook</h1>
       <ContactForm onAdd={addContact} />
       <SearchBox value={filter} onFilter={setFilter} />

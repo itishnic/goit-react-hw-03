@@ -1,6 +1,6 @@
 import initialContacts from "./contacts.json";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import css from "./App.module.css";
 import "./App.css";
@@ -9,12 +9,13 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
 
 function App() {
-  const [contacts, setContacts] = useState(initialContacts);
-const [filter, setFilter] = useState("");
-
-
-
-
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem("cardList");
+    return savedContacts !== null
+      ? JSON.parse(savedContacts)
+      : JSON.parse(initialContacts);
+  });
+  const [filter, setFilter] = useState("");
 
   const addContact = (newContacts) => {
     setContacts((prevContacts) => {
@@ -28,13 +29,16 @@ const [filter, setFilter] = useState("");
     });
   };
 
-
   const visibleContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
+  useEffect(() => {
+    localStorage.setItem("cardList", JSON.stringify(contacts));
+  }, [contacts]);
+
   return (
-    <div className={css.container}>
+    <div>
       <h1>Phonebook</h1>
       <ContactForm onAdd={addContact} />
       <SearchBox value={filter} onFilter={setFilter} />

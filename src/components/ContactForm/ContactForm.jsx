@@ -54,7 +54,7 @@ const handleSubmit = (values, { resetForm }) => {
         <Form className={css.form}>
           <br />
           <div className={css.field}>
-            <label htmlFor={nameFieldId}>Username </label>
+            <label htmlFor={nameFieldId}>Name</label>
             <Field type="text" name="name" id={nameFieldId} />
             <ErrorMessage name="name" component="span" />
           </div>

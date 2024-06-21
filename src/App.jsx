@@ -9,13 +9,7 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
 
 function App() {
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem("cardList");
-    return savedContacts.length !== null
-      ? JSON.parse(savedContacts)
-      : initialContacts;
-    
-  });
+  const [contacts, setContacts] = useState(initialContacts); 
   const [filter, setFilter] = useState("");
 
   const addContact = (newContacts) => {
